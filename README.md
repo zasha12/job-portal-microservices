@@ -1,2 +1,155 @@
-# job-portal-microservices
- Job Portal microservices with Spring Boot + Spring Cloud — Job, Company &amp; Review services registered on Eureka, talking via OpenFeign, each with its own PostgreSQL database. Built following Faisal Memon's (EmbarkX) Spring Boot Microservices course
+<div align="center">
+
+# 🧩 Job Portal Microservices
+
+### Distributed system with Spring Boot + Spring Cloud — Eureka, OpenFeign & PostgreSQL
+
+*Service Registry • Job Service • Company Service • Review Service • Feign Calls*
+
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F)
+![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2022.0.x-6DB33F)
+![Java](https://img.shields.io/badge/Java-17-orange)
+![Discovery](https://img.shields.io/badge/Discovery-Eureka-blueviolet)
+![Database](https://img.shields.io/badge/Database-PostgreSQL-4169E1)
+
+</div>
+
+---
+
+## 📌 Overview
+
+**Job Portal Microservices** is a distributed backend where each business domain runs as an **independent Spring Boot service** with its own database, registered with a **Eureka service registry** and communicating via **declarative OpenFeign clients** — instead of one big monolith.
+
+> 🎓 **Built while completing the Spring Boot Microservices course by [Faisal Memon](https://www.youtube.com/@FaisalFromEmbarkX) (EmbarkX)** — all code was written by me as I learned each concept, then rebranded and extended beyond the course baseline.
+
+## 🏗️ Architecture
+
+```
+                        ┌────────────────────────┐
+                        │   service-reg (Eureka) │
+                        │   port 8761            │
+                        └───▲──────▲──────▲──────┘
+             registers ┌────┘      │      └─────┐
+                       │           │            │
+              ┌────────┴───┐ ┌─────┴──────┐ ┌───┴────────┐
+              │   jobms    │ │ companyms  │ │  reviewms  │
+              │  :8081     │ │  :8082     │ │  :8083     │
+              │ PostgreSQL │ │ PostgreSQL │ │ PostgreSQL │
+              └─────┬──────┘ └────────────┘ └────────────┘
+                    │   OpenFeign (company details)
+                    └─────────────▶
+```
+
+## 📦 Services
+
+| Module | Port | Responsibility |
+|---|---|---|
+| `service-reg` | 8761 | **Eureka Server** — service registry & discovery |
+| `jobms` | 8081 | Job postings CRUD; enriches responses with company data via Feign |
+| `companyms` | 8082 | Company profiles CRUD |
+| `reviewms` | 8083 | Company reviews CRUD |
+
+> 📝 *Adjust ports/names to match your actual configuration.*
+
+## 🧰 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Spring Boot 3.1 |
+| Discovery | Spring Cloud Netflix Eureka |
+| Inter-service calls | OpenFeign (declarative REST clients) |
+| Persistence | Spring Data JPA + PostgreSQL (H2 for tests) |
+| Build | Maven (multi-module) |
+| Language | Java 17 |
+
+## 🚀 Getting Started
+
+### Prerequisites
+- **JDK 17+** — [download here](https://adoptium.net/)
+- **Maven 3.9+**
+- **PostgreSQL** running locally
+
+### 1. Create the databases
+
+```sql
+CREATE DATABASE job_db;
+CREATE DATABASE company_db;
+CREATE DATABASE review_db;
+```
+
+### 2. Configure credentials — placeholders only, NEVER real passwords!
+
+In each service's `src/main/resources/application.properties`:
+
+```properties
+spring.datasource.username=YOUR_DB_USER
+spring.datasource.password=YOUR_DB_PASSWORD
+```
+
+### 3. Start the services (ORDER MATTERS!)
+
+```bash
+# 1️⃣ Registry FIRST — every other service registers with it
+cd service-reg
+mvn spring-boot:run
+
+# 2️⃣ Then the domain services (separate terminals)
+cd companyms && mvn spring-boot:run
+cd reviewms  && mvn spring-boot:run
+cd jobms     && mvn spring-boot:run
+```
+
+### 4. Verify
+
+- Eureka dashboard → **http://localhost:8761** (all services should show UP)
+- Example call → `GET http://localhost:8081/api/v1/jobs`
+
+## 🔌 Key Flows
+
+**Create a job posting**
+```
+POST jobms /api/v1/jobs  →  saved in job_db with companyId
+```
+
+**Fetch a job (enriched)**
+```
+GET jobms /api/v1/jobs/{id}
+     → jobms calls companyms via Feign (GET /api/v1/companies/{companyId})
+     → returns job + company details in one response
+```
+
+## 🎓 Microservice Concepts Practised
+
+- Service decomposition by domain (why microservices vs monolith)
+- **Service discovery** with Eureka (register/lookup instead of hardcoded URLs)
+- **Synchronous communication** with OpenFeign clients
+- Database-per-service isolation
+- Independent build & deployment of each service
+
+## 🛣️ Roadmap
+
+- [ ] API Gateway (Spring Cloud Gateway) — single entry point + routing
+- [ ] Config Server — centralized configuration
+- [ ] Resilience: Circuit Breaker (Resilience4j) on Feign calls
+- [ ] Distributed tracing (Micrometer + Zipkin)
+- [ ] Docker Compose for the whole system
+- [ ] CI pipeline with GitHub Actions
+
+## 📄 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+## 👤 Author
+
+**Kartikeya Dhasmana**
+- GitHub: [@zasha12](https://github.com/zasha12)
+- LinkedIn: [Kartikeya Dhasmana](https://www.linkedin.com/in/kartikeya-dhasmana-b91389245/)
+- Email: kartikeyadhasmana@gmail.com
+
+---
+
+<div align="center">
+
+⭐ *If this helped you understand microservices, star it!*
+
+</div>

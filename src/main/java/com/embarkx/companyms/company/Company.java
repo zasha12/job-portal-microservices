@@ -1,4 +1,4 @@
-package com.embarkx.companyms.company;
+package com.zasha12.companyms.company;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;

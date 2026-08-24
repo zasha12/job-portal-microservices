@@ -1,4 +1,4 @@
-package com.embarkx.companyms.company;
+package com.zasha12.companyms.company;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

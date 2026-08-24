@@ -1,8 +1,8 @@
-package com.embarkx.reviewms.review.impl;
+package com.zasha12.reviewms.review.impl;
 
-import com.embarkx.reviewms.review.Review;
-import com.embarkx.reviewms.review.ReviewRepository;
-import com.embarkx.reviewms.review.ReviewService;
+import com.zasha12.reviewms.review.Review;
+import com.zasha12.reviewms.review.ReviewRepository;
+import com.zasha12.reviewms.review.ReviewService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

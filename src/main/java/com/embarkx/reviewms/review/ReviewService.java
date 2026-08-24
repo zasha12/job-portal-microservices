@@ -1,4 +1,4 @@
-package com.embarkx.reviewms.review;
+package com.zasha12.reviewms.review;
 
 import java.util.List;
 

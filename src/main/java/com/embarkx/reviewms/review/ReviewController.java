@@ -1,4 +1,4 @@
-package com.embarkx.reviewms.review;
+package com.zasha12.reviewms.review;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

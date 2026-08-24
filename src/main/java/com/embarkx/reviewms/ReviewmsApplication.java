@@ -1,4 +1,4 @@
-package com.embarkx.reviewms;
+package com.zasha12.reviewms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.embarkx.service_reg;
+package com.zasha12.service_reg;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.embarkx.reviewms;
+package com.zasha12.reviewms;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

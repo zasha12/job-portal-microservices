@@ -1,4 +1,4 @@
-package com.embarkx.companyms;
+package com.zasha12.companyms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

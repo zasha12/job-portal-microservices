@@ -1,4 +1,4 @@
-package com.embarkx.companyms.company;
+package com.zasha12.companyms.company;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

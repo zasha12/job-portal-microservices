@@ -1,7 +1,7 @@
-package com.embarkx.companyms.company.impl;
-import com.embarkx.companyms.company.Company;
-import com.embarkx.companyms.company.CompanyRepository;
-import com.embarkx.companyms.company.CompanyService;
+package com.zasha12.companyms.company.impl;
+import com.zasha12.companyms.company.Company;
+import com.zasha12.companyms.company.CompanyRepository;
+import com.zasha12.companyms.company.CompanyService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
